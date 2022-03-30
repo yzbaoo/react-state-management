@@ -3,15 +3,15 @@ import {
   Routes,
   Route
 } from 'react-router-dom'; // react-router-dom@v6
-import Page_1 from './page/1_page'
-import Page_2 from './page/2_page'
+import Page1 from './page/page1'
+import Page2 from './page/page2'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/1" element={<Page_1/>} />
-        <Route exact path="/2" element={<Page_2/>} />
+        <Route exact path="/1" element={<Page1/>} />
+        <Route exact path="/2" element={<Page2/>} />
       </Routes>
     </BrowserRouter>
   );
