@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom'
 // import user from './model';
 import {useDispatch, useSelector} from 'react-redux'
@@ -11,6 +11,7 @@ function Parent() {
   
   const increment = () => {
     dispatch({type: 'user/update'});
+    console.error('dva:',userInfo);
   }
 
   return (

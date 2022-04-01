@@ -17,6 +17,7 @@ export default {
   reducers: {
     update: (state, action) => {
       state.grade++;
+      // return state;
       return {...state};
     },
     updateChildren: (state, action) => {

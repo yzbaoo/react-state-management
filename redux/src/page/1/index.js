@@ -1,8 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import user from './model';
 import {useDispatch, useSelector} from 'react-redux'
-import produce from 'immer'
+// import produce from 'immer'
 
 function Parent() {
   const dispatch = useDispatch();
@@ -11,7 +10,8 @@ function Parent() {
   // userInfo.name = 'xx'; // 【验证一】数据只读，这点很重要！！
   
   const increment = () => {
-    dispatch(user.actions.update());
+    dispatch({type: 'user/update'});
+    console.error('redux:',userInfo); // 【注意】dva和redux-toolkit值的更新时机不同
   }
 
   return (
@@ -50,7 +50,7 @@ const Children = React.memo(({name, grade}) => {
     // });
     // dispatch(user.actions.update({children: copy}));
 
-    dispatch(user.actions.updateChildren(name));
+    dispatch({type: 'user/updateChildren', payload: name});
   }
 
   return (
