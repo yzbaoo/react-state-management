@@ -34,15 +34,15 @@ const user = createSlice({
       state.grade++;
       return state;
     },
-    updateChildren: (state, action) => {
-      const name = action.payload;
-      const record = state.children.find(v => v.name === name);
-      record.grade++;
-      return state
-    },
+    updateChildren: updateChildren
   }
 })
-
+function updateChildren(state, action) {
+  const name = action.payload;
+  const record = state.children.find(v => v.name === name);
+  record.grade++;
+  return state
+}
 // console.error('---user---:',user);
 
 export default user;
