@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom'
 // import user from './model';
 import {useDispatch, useSelector} from 'react-redux'
+// import {store} from '../../store';
 
 function Parent() {
   const dispatch = useDispatch();
   const { user: userInfo } = useSelector(state => state); // store.getState()
   // console.error('---parent render---:',userInfo)
-  // userInfo.name = 'xx'; // 【验证一】数据不是只读
+  userInfo.name = 'xx'; // 【验证一】数据不是只读
   
   const increment = () => {
     dispatch({type: 'user/update'});
+    // console.error('store:',store.getState().user.grade);
     console.error('dva:',userInfo);
   }
 

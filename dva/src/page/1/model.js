@@ -20,7 +20,7 @@ export default {
       // return state;
       return {...state};
     },
-    updateChildren: (state, action) => {
+    updateChildren: (state, action) => { // 【注意】不纯了
       const name = action.payload;
       const record = state.children.find(v => v.name === name);
       record.grade++;
