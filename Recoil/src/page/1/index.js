@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom'
 // import user from './model';
 import {useDispatch, useSelector} from 'react-redux'
@@ -13,12 +13,12 @@ function Parent() {
   const increment = () => {
     dispatch({type: 'user/update'});
     // console.error('store:',store.getState().user.grade);
-    console.error('dva:',userInfo);
+    console.error('recoil:',userInfo);
   }
 
   return (
     <div>
-      <h3> <Link to="/2">dva</Link> </h3>
+      <h3> <Link to="/2">recoil</Link> </h3>
       <p> 姓名：{userInfo.name} </p>
       <p> 年级：{userInfo.grade} <button onClick={increment}> +1 </button> </p>
       <div> 

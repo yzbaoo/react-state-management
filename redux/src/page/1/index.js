@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 // import produce from 'immer'
@@ -8,7 +8,7 @@ function Parent() {
   const dispatch = useDispatch();
   const { user: userInfo } = useSelector(state => state); // store.getState()
   // console.error('---parent render---:',userInfo)
-  userInfo.name = 'xx'; // 【验证一】数据只读，这点很重要！！
+  // userInfo.name = 'xx'; // 【验证一】数据只读，这点很重要！！
   
   const increment = () => {
     dispatch({type: 'user/update'});
