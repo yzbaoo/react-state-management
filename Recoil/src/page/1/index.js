@@ -1,19 +1,17 @@
 import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom'
-// import user from './model';
-import {useDispatch, useSelector} from 'react-redux'
-// import {store} from '../../store';
+import {useRecoilState, useRecoilValue} from 'recoil'
+import {userAtom, userUpdater} from './model'
+import produce from 'immer'
 
 function Parent() {
-  const dispatch = useDispatch();
-  const { user: userInfo } = useSelector(state => state); // store.getState()
+  const [userInfo, setUserInfo] = useRecoilState(userAtom);
   // console.error('---parent render---:',userInfo)
-  // userInfo.name = 'xx'; // 【验证一】数据不是只读
-  
   const increment = () => {
-    dispatch({type: 'user/update'});
-    // console.error('store:',store.getState().user.grade);
-    console.error('recoil:',userInfo);
+    // userInfo.grade++; // 只读
+    const copyUserInfo = {...userInfo};
+    copyUserInfo.grade++;
+    setUserInfo(copyUserInfo);
   }
 
   return (
@@ -21,6 +19,7 @@ function Parent() {
       <h3> <Link to="/2">recoil</Link> </h3>
       <p> 姓名：{userInfo.name} </p>
       <p> 年级：{userInfo.grade} <button onClick={increment}> +1 </button> </p>
+      {/* <p> children总年级：{userInfo.children[0].grade} </p> */}
       <div> 
         children：
         
@@ -33,13 +32,14 @@ function Parent() {
   );
 }
 
-// 【验证三】memo只能用在纯函数组件中 
-// React.memo has a useState, useReducer or useContext Hook in its implementation, it will still re-render when state or context change.
 const Children = React.memo(({name, grade}) => {
-  const dispatch = useDispatch();
-  // console.error('---children render---：', name);
+  const [userInfo, setUserInfo] = useRecoilState(userAtom);
   const increment = () => {
-    dispatch({type: 'user/updateChildren', payload: name});
+    const copy = produce(userInfo, (draft)=>{
+     const record =  draft.children.find(v => v.name === name);
+     record.grade++;
+    });
+    setUserInfo(copy);
   }
 
   return (
