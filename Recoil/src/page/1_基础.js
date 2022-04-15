@@ -1,11 +1,47 @@
 import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom'
-import {useRecoilState, useRecoilValue} from 'recoil'
-import {userAtom, userUpdater} from './model'
+import {atom, selector, useRecoilState, useRecoilValue} from 'recoil'
 import produce from 'immer'
 
+const mockApi = () => new Promise(res => {
+  setTimeout(() => {
+    res({
+      name: 'parent',
+      grade: 5,
+      children: [
+        {
+          name: 'children1',
+          grade: 1,
+        },
+        {
+          name: 'children2',
+          grade: 1,
+        },
+      ]
+    });
+  }, 2000)
+})
+
+// initialState
+export const userState = atom({
+  key: 'userState',
+  default: (async () => {
+    const data = await mockApi();
+    return data;
+  })()
+})
+
+// 
+export const userSelector = selector({
+  key: 'userSelector',
+  get: async () => {
+    const data = await mockApi();
+    return data;
+  }
+})
+
 function Parent() {
-  const [userInfo, setUserInfo] = useRecoilState(userAtom);
+  const [userInfo, setUserInfo] = useRecoilState(userState);
   // console.error('---parent render---:',userInfo)
   const increment = () => {
     // userInfo.grade++; // 只读
@@ -33,7 +69,7 @@ function Parent() {
 }
 
 const Children = React.memo(({name, grade}) => {
-  const [userInfo, setUserInfo] = useRecoilState(userAtom);
+  const [userInfo, setUserInfo] = useRecoilState(userState);
   const increment = () => {
     const copy = produce(userInfo, (draft)=>{
      const record =  draft.children.find(v => v.name === name);

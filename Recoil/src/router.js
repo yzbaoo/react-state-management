@@ -3,7 +3,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom'; // react-router-dom@v6
-import Page1 from './page/1'
+import Page1 from './page/1_基础'
 // import Page2 from './page/page2'
 
 function App() {
