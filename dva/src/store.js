@@ -1,6 +1,6 @@
 import * as core from 'dva-core';
 // import createLoading from 'dva-loading';
-import user from './page/1/model';
+import user from './page/1_基础/model';
 // import immutableStateInvariantMiddleware from 'redux-immutable-state-invariant'
 
 const app = core.create({}, {

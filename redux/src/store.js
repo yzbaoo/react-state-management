@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import user from './page/1/model';
+import user from './page/1_基础/model';
 
 export const store = configureStore({
   reducer: {
