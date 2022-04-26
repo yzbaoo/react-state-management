@@ -4,13 +4,13 @@ import Router from './router';
 import {RecoilRoot} from 'recoil'
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <RecoilRoot>
       <Suspense fallback={<div>Loading... </div>}>
         <Router />
       </Suspense>
-    </RecoilRoot>,
-  // </React.StrictMode>,
+    </RecoilRoot>
+  </React.StrictMode>,
   document.getElementById('root'),
   // () => {console.error('renderered:',document.getElementById('root')._reactRootContainer)}
 );
